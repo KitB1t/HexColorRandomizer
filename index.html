@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Hex Color Randomizer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+            html body {
+                height: 100%;
+                margin: 0;
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 600;
+                font-style: normal;
+                transition: background-image, 20s, ease-in-out;
+            }
+            body {
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .container {
+                margin-top: 250px;
+                text-align: center;
+                word-spacing: 20px;
+                justify-content: center;
+            }
+            .hexColors{
+                animation-name: starting;
+                animation-duration: 2s;
+            }
+            @keyframes starting {
+                from {margin-top: 260px; color: rgba(0,0,0,0.2);}
+                to {margin-top: 250px; color: rgba(0,0,0,1);}
+            }
+            @keyframes textEdit {
+                0% {
+                    word-spacing: 0;
+                    letter-spacing: -10px;
+                }
+                100% {
+                    word-spacing: 20px;
+                    letter-spacing: normal;
+                }
+            }
+            @keyframes btnClick {
+                0% {
+                    margin-top: 230px;
+                    font-size: 1rem;
+                }
+                50% {
+                    margin-top: 250px;
+                    font-size: 1.5rem;
+                }
+                100% {
+                    margin-top: 230px;
+                    font-size: 1rem;
+                }
+            }
+            #lbl {
+                animation-name: textEdit;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+            }
+            #btn {
+                animation-name: btnClick;
+                animation-duration: 0.5s;
+                animation-fill-mode: forwards;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="hexColors">
+                <h2 id="lbl">#<span id="hexNumber">00000</span></h2><br><br><br><br>
+                <button id="btn" type="button" class="btn btn-warning" onclick="changeColor()">Generate</button>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script>
+            function changeColor(){
+                var hexNum = ["0","1","2","3","4","5","6","7","8","9","A","B","C","E","F"]
+                var hexcode = '' 
+                var hexcode2 = ''
+                for(var i=0;i<6;i++){
+                    var random = Math.floor(Math.random()*hexNum.length)
+                    hexcode+=hexNum[random]
+                    var random2 = Math.floor(Math.random()*hexNum.length)
+                    hexcode2+=hexNum[random2]   
+                }
+                var randomNum = Math.floor(Math.random()*360)
+                document.getElementById('hexNumber').textContent = `linear-gradient ${randomNum}, #${hexcode}, #${hexcode2}`
+                document.getElementsByTagName('body')[0].style.backgroundImage = `linear-gradient(${randomNum}deg, #${hexcode}, #${hexcode2})`
+                var label = document.getElementById('lbl')
+                label.style.animation = 'none'
+                label.offsetHeight;
+                label.style.animation = null
+                var btn = document.getElementById('btn')
+                btn.style.animation = 'none'
+                btn.offsetHeight;
+                btn.style.animation = null
+            }
+        </script>
+    </body>
+</html>
